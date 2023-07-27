@@ -1,4 +1,4 @@
-# Metodos 02 Exercise
+# Metodos 02 Exercise Anyi
 
 Con este ejercicio está planteado para el uso de metodos de array sobre datos dados (array de objetos). implementando lógica, parte de HTML y manipulación del DOM
 
