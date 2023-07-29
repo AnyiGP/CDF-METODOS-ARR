@@ -207,25 +207,35 @@ const btnDate = () => {
 //1- hacer fx promedios = ${alumno.examen1} + ${alumno.examen2} + ${alumno.examen3} / 3 notas
 
 const btnPromedios = () => {
-    alumnos.forEach((alumno) => {
-        let sumaPromedios = alumno.examen1 + alumno.examen2 + alumno.examen3
-        let promedio = sumaPromedios / 3
-        
-
-        bodyTableAlumnos.innerHTML += `<tr>
+  alumnos.forEach((alumno) => {
+    let sumaPromedios = alumno.examen1 + alumno.examen2 + alumno.examen3;
+    let promedio = sumaPromedios / 3;
+    bodyTableAlumnos.innerHTML += `<tr>
         <td>${alumno.nombre}</td>
         <td>${alumno.apellido}</td>
         <td>${alumno.dni}</td>
         <td>${promedio}</td>
     </tr>`;
-      });
-      
+  });
 };
 
 // BOTON ASISTENCIAS => Deberia devolver la tabla de alumnos con la cantidad de asistencia de los alumnos sobre el total de 24 clases. (ej: alumno asiste 13 clases. deberia devolver en la columna 13/24).
 // Además deberás crear una columna* con el porcentaje de asistencias.
 // *la columna se deberá eliminar si se selecciona otro boton
-const btnAsistencia = () => {};
+const btnAsistencia = () => {
+  alumnos.forEach((alumno) => {
+    //let asistencia = alumno.asistencias;
+    let porcentaje = Math.ceil((alumno.asistencias / 24) * 100);
+    //let porcentajeRedondeado = (porcentaje)
+    bodyTableAlumnos.innerHTML += `<tr>
+            <td>${alumno.nombre}</td>
+            <td>${alumno.apellido}</td>
+            <td>${alumno.dni}</td>
+            <td>${alumno.asistencias}/24</td>
+            <td class="delete">${porcentaje}%</td>
+        </tr>`;
+  });
+};
 
 // BOTON APROBADOS => - Deberia devolver la tabla de alumnos en ella solo aquellos que tengan aprobado el cursado, en base a las siguientes condiciones:
 // Un promedio ≥ 70 y un porcentaje de asistencia ≥ 70
