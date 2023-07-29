@@ -208,11 +208,15 @@ const btnDate = () => {
 
 const btnPromedios = () => {
     alumnos.forEach((alumno) => {
+        let sumaPromedios = alumno.examen1 + alumno.examen2 + alumno.examen3
+        let promedio = sumaPromedios / 3
+        
+
         bodyTableAlumnos.innerHTML += `<tr>
         <td>${alumno.nombre}</td>
         <td>${alumno.apellido}</td>
         <td>${alumno.dni}</td>
-        <td>${alumno.promedio}</td>
+        <td>${promedio}</td>
     </tr>`;
       });
       
