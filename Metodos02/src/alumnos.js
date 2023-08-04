@@ -173,7 +173,7 @@ const alumnos = [
 const bodyTableAlumnos = document.querySelector("#bodyAlumnos"); // Obtenemos el cuerpo de la tabla -> donde agregas los datos correspondiente con <td></td>
 const headerTable = document.querySelector("#header-table"); // Obtenemos la seccion de los titulos de la tabla. Este te servirá para agregar esa 4ta columna en 'Asistencias'
 const thridColumn = document.querySelector("#thrid-column"); // Obtenemos el titulo de la 3 columna, que debe cambiar según lo que muestre.
-let addColumn = false; // Variable que debe cambiar según -> Si existe la 4 columna tiene que tener el valor 'true'. Si no existe en 'false'
+let addColumn = false; // Variable que debe cambiar según -> Si existe la 4 columna tiene que tener el valor 'true'. Si no existe en 'false'. HACER CON UN CONDICIONAL
 //-------------------------------------------------------------------NO MODIFICAR 👆-------------------------------------------------------------------//
 
 // BOTON DATOS ALUMNO => Deberia devolver la tabla de alumnos con los datos personales de cada alumno (nombre, apellido, dni).
@@ -202,14 +202,19 @@ const btnDate = () => {
   // console.log(datosAlumnos);
 };
 
+// HACER CON UN IF SI SE PRIETA OTRO BTN QUE SE OCULTE ESTE O QUE SE AGREGUE A LA COLUMNA Y QUE SE VEA LA MISMA SIN AGREGAR MAS DATOS
+
 // BOTON PROMEDIOS => Deberia devolver la tabla de alumnos con el promedio de cada alumno, este consta en 3 notas (examen1, examen2, examen3).
 
 //1- hacer fx promedios = ${alumno.examen1} + ${alumno.examen2} + ${alumno.examen3} / 3 notas
+
+//CÓMO HAGO PARA QUE SE AGREGE SOLO ESA COLUMNA SIN QUE ME TIRE TODO DEVUELTA Y ACUMULADO, SERÍA UN PUSH DE ESA COLUMNA A LA TABLA
 
 const btnPromedios = () => {
   alumnos.forEach((alumno) => {
     let sumaPromedios = alumno.examen1 + alumno.examen2 + alumno.examen3;
     let promedio = sumaPromedios / 3;
+    //inner en 
     bodyTableAlumnos.innerHTML += `<tr>
         <td>${alumno.nombre}</td>
         <td>${alumno.apellido}</td>
@@ -217,6 +222,8 @@ const btnPromedios = () => {
         <td>${promedio}</td>
     </tr>`;
   });
+  thridColumn.innerHTML = 'DNI'
+  headerTable.innerHTML += `<th id="thrid-column">Promedio</th>`
 };
 
 // BOTON ASISTENCIAS => Deberia devolver la tabla de alumnos con la cantidad de asistencia de los alumnos sobre el total de 24 clases. (ej: alumno asiste 13 clases. deberia devolver en la columna 13/24).
