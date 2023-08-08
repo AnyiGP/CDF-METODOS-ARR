@@ -202,8 +202,6 @@ const btnDate = () => {
   // console.log(datosAlumnos);
 };
 
-// HACER CON UN IF SI SE PRIETA OTRO BTN QUE SE OCULTE ESTE O QUE SE AGREGUE A LA COLUMNA Y QUE SE VEA LA MISMA SIN AGREGAR MAS DATOS
-
 // BOTON PROMEDIOS => Deberia devolver la tabla de alumnos con el promedio de cada alumno, este consta en 3 notas (examen1, examen2, examen3).
 
 //1- hacer fx promedios = ${alumno.examen1} + ${alumno.examen2} + ${alumno.examen3} / 3 notas
@@ -222,7 +220,7 @@ const btnPromedios = () => {
         <td>${promedio}</td>
     </tr>`;
   });
-  thridColumn.innerHTML = 'DNI'
+  thridColumn.innerHTML = 'Promedio'
   headerTable.innerHTML += `<th id="thrid-column">Promedio</th>`
 };
 
@@ -261,5 +259,21 @@ const deleteColumn = () => {
     addColumn = false;
   }
 };
+
+// HACER CON UN IF SI SE APRIETA OTRO BTN QUE SE OCULTE ESTE O QUE SE AGREGUE A LA COLUMNA Y QUE SE VEA LA MISMA SIN AGREGAR MAS DATOS
+
+//FUNCION PARA MOSTRAR U OCULTAR // LA BER'IA USAR PARA MOSTRAR LAS COLUMNAS CORREPONDIENTES AL BTN DONDE EL USUARIO HACE CLICK, CUANDO MUESTRAESE CONTANIDO OCULTA EL DE LAS OTRAS COLUMNAS
+
+const setColum = () => {
+  if (divProyectos.style.display === "none") {
+    divProyectos.style.display = "flex";
+  } else {
+    divProyectos.style.display = "none";
+  }
+};
+
+const btn = document.querySelector(".btn-m-c");
+btn.addEventListener("click", setColum);
+
 
 //btnDate(alumnos)
