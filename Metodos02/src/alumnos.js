@@ -183,6 +183,7 @@ const btnDate = () => {
   // console.log(datosAlumnos);
 
   //cuado hago click en datos alumnos devuelve la tabla que debe contener el acceso alumno.nombre, alumno.....
+  bodyTableAlumnos.innerHTML = "";
   alumnos.forEach((alumno) => {
     bodyTableAlumnos.innerHTML += `<tr>
     <td>${alumno.nombre}</td>
@@ -190,6 +191,8 @@ const btnDate = () => {
     <td>${alumno.dni}</td>
 </tr>`;
   });
+  thridColumn.innerHTML = "Dni";
+  // headerTable.innerHTML += `<th id="thrid-column">Dni</th>`;
   //console.log(datosAlumnos);
 
   // const datosAlumnos =
@@ -206,28 +209,31 @@ const btnDate = () => {
 
 //1- hacer fx promedios = ${alumno.examen1} + ${alumno.examen2} + ${alumno.examen3} / 3 notas
 
-//CÓMO HAGO PARA QUE SE AGREGE SOLO ESA COLUMNA SIN QUE ME TIRE TODO DEVUELTA Y ACUMULADO, SERÍA UN PUSH DE ESA COLUMNA A LA TABLA
+//CÓMO HAGO PARA QUE SE AGREGE SOLO ESA COLUMNA SIN QUE ME TIRE TODO DEVUELTA Y ACUMULADO, SERÍA UN PUSH DE ESA COLUMNA A LA TABLA es así: bodyTableAlumnos.innerHTML = "";
 
 const btnPromedios = () => {
+  deleteColumn()
+  bodyTableAlumnos.innerHTML = "";
   alumnos.forEach((alumno) => {
     let sumaPromedios = alumno.examen1 + alumno.examen2 + alumno.examen3;
     let promedio = sumaPromedios / 3;
-    //inner en 
+    //inner en
     bodyTableAlumnos.innerHTML += `<tr>
         <td>${alumno.nombre}</td>
         <td>${alumno.apellido}</td>
-        <td>${alumno.dni}</td>
         <td>${promedio}</td>
     </tr>`;
   });
-  thridColumn.innerHTML = 'Promedio'
-  headerTable.innerHTML += `<th id="thrid-column">Promedio</th>`
+  thridColumn.innerHTML = "Promedio";
 };
 
 // BOTON ASISTENCIAS => Deberia devolver la tabla de alumnos con la cantidad de asistencia de los alumnos sobre el total de 24 clases. (ej: alumno asiste 13 clases. deberia devolver en la columna 13/24).
 // Además deberás crear una columna* con el porcentaje de asistencias.
 // *la columna se deberá eliminar si se selecciona otro boton
+
+//SOLO EN ASISTENCIA DE AGREGAR LA ULTIMA COLUMNA, EN EL RESTO TENGO QUE INVOCARA LA FUNCION DELETE COLUMN
 const btnAsistencia = () => {
+  bodyTableAlumnos.innerHTML = "";
   alumnos.forEach((alumno) => {
     //let asistencia = alumno.asistencias;
     let porcentaje = Math.ceil((alumno.asistencias / 24) * 100);
@@ -235,19 +241,57 @@ const btnAsistencia = () => {
     bodyTableAlumnos.innerHTML += `<tr>
             <td>${alumno.nombre}</td>
             <td>${alumno.apellido}</td>
-            <td>${alumno.dni}</td>
             <td>${alumno.asistencias}/24</td>
             <td class="delete">${porcentaje}%</td>
         </tr>`;
   });
+  thridColumn.innerHTML = "Asistencia";
+  headerTable.innerHTML += `<th id="delete">Porcentaje</th>`;
+  addColumn = true
 };
 
 // BOTON APROBADOS => - Deberia devolver la tabla de alumnos en ella solo aquellos que tengan aprobado el cursado, en base a las siguientes condiciones:
 // Un promedio ≥ 70 y un porcentaje de asistencia ≥ 70
-const btnAprobados = () => {};
+const btnAprobados = () => {
+  bodyTableAlumnos.innerHTML = "";
+  alumnos.forEach((alumno) => {
+    //calculo promedios
+    let sumaPromedios = alumno.examen1 + alumno.examen2 + alumno.examen3;
+    let promedio = sumaPromedios / 3;
+    //calculo porcentaje de asistencias
+    let porcentaje = Math.ceil((alumno.asistencias / 24) * 100);
+
+    if ((promedio >= 70) & (porcentaje >= 70)) {
+      bodyTableAlumnos.innerHTML += `<tr>
+            <td>${alumno.nombre}</td>
+            <td>${alumno.apellido}</td>
+            <td>Aprobado</td>
+        </tr>`;
+    }
+  });
+  thridColumn.innerHTML = "Aprobados";
+};
 
 // Deberia devolver la tabla de alumnos con aquellos que no aprobaron el cursado.
-const btnReprobados = () => {};
+const btnReprobados = () => {
+  bodyTableAlumnos.innerHTML = "";
+  alumnos.forEach((alumno) => {
+    //calculo promedios
+    let sumaPromedios = alumno.examen1 + alumno.examen2 + alumno.examen3;
+    let promedio = sumaPromedios / 3;
+    //calculo porcentaje de asistencias
+    let porcentaje = Math.ceil((alumno.asistencias / 24) * 100);
+
+    if ((promedio <= 70) & (porcentaje <= 70)) {
+      bodyTableAlumnos.innerHTML += `<tr>
+            <td>${alumno.nombre}</td>
+            <td>${alumno.apellido}</td>
+            <td>Reprobado</td>
+        </tr>`;
+    }
+  });
+  thridColumn.innerHTML = "Reprobados";
+};
 
 // AYUDA => esta función te ayudará a eliminar la columna extra que tienes que agregar en 'BOTON ASISTENCIAS'.
 // Para que esta funcione, la columna que agregues debe tener como ID => 'delete'
@@ -274,6 +318,5 @@ const setColum = () => {
 
 const btn = document.querySelector(".btn-m-c");
 btn.addEventListener("click", setColum);
-
 
 //btnDate(alumnos)
