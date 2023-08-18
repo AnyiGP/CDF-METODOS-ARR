@@ -212,9 +212,9 @@ const btnDate = () => {
 //CÓMO HAGO PARA QUE SE AGREGE SOLO ESA COLUMNA SIN QUE ME TIRE TODO DEVUELTA Y ACUMULADO, SERÍA UN PUSH DE ESA COLUMNA A LA TABLA es así: bodyTableAlumnos.innerHTML = "";
 
 const btnPromedios = () => {
-  deleteColumn()
+  deleteColumn();
   bodyTableAlumnos.innerHTML = "";
-  alumnos.forEach((alumno) => {
+  alumnos.map((alumno) => {
     let sumaPromedios = alumno.examen1 + alumno.examen2 + alumno.examen3;
     let promedio = sumaPromedios / 3;
     //inner en
@@ -225,6 +225,7 @@ const btnPromedios = () => {
     </tr>`;
   });
   thridColumn.innerHTML = "Promedio";
+  //addColumn = true
 };
 
 // BOTON ASISTENCIAS => Deberia devolver la tabla de alumnos con la cantidad de asistencia de los alumnos sobre el total de 24 clases. (ej: alumno asiste 13 clases. deberia devolver en la columna 13/24).
@@ -232,7 +233,9 @@ const btnPromedios = () => {
 // *la columna se deberá eliminar si se selecciona otro boton
 
 //SOLO EN ASISTENCIA DE AGREGAR LA ULTIMA COLUMNA, EN EL RESTO TENGO QUE INVOCARA LA FUNCION DELETE COLUMN
+
 const btnAsistencia = () => {
+  deleteColumn();
   bodyTableAlumnos.innerHTML = "";
   alumnos.forEach((alumno) => {
     //let asistencia = alumno.asistencias;
@@ -247,12 +250,13 @@ const btnAsistencia = () => {
   });
   thridColumn.innerHTML = "Asistencia";
   headerTable.innerHTML += `<th id="delete">Porcentaje</th>`;
-  addColumn = true
+  addColumn = true;
 };
 
 // BOTON APROBADOS => - Deberia devolver la tabla de alumnos en ella solo aquellos que tengan aprobado el cursado, en base a las siguientes condiciones:
 // Un promedio ≥ 70 y un porcentaje de asistencia ≥ 70
 const btnAprobados = () => {
+  deleteColumn();
   bodyTableAlumnos.innerHTML = "";
   alumnos.forEach((alumno) => {
     //calculo promedios
@@ -261,7 +265,7 @@ const btnAprobados = () => {
     //calculo porcentaje de asistencias
     let porcentaje = Math.ceil((alumno.asistencias / 24) * 100);
 
-    if ((promedio >= 70) & (porcentaje >= 70)) {
+    if (promedio >= 70 && porcentaje >= 70) {
       bodyTableAlumnos.innerHTML += `<tr>
             <td>${alumno.nombre}</td>
             <td>${alumno.apellido}</td>
@@ -274,6 +278,7 @@ const btnAprobados = () => {
 
 // Deberia devolver la tabla de alumnos con aquellos que no aprobaron el cursado.
 const btnReprobados = () => {
+  deleteColumn();
   bodyTableAlumnos.innerHTML = "";
   alumnos.forEach((alumno) => {
     //calculo promedios
