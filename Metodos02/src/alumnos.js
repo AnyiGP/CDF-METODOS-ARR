@@ -209,7 +209,7 @@ const btnDate = () => {
 
 //1- hacer fx promedios = ${alumno.examen1} + ${alumno.examen2} + ${alumno.examen3} / 3 notas
 
-//CÓMO HAGO PARA QUE SE AGREGE SOLO ESA COLUMNA SIN QUE ME TIRE TODO DEVUELTA Y ACUMULADO, SERÍA UN PUSH DE ESA COLUMNA A LA TABLA es así: bodyTableAlumnos.innerHTML = "";
+//CÓMO HAGO PARA QUE SE AGREGE SOLO ESA COLUMNA SIN QUE ME TIRE TODO DEVUELTA Y ACUMULADO, SERÍA UN PUSH DE ESA COLUMNA A LA TABLA es así: bodyTableAlumnos.innerHTML = ""; y para borrar la columna se usa deleteColumn()
 
 const btnPromedios = () => {
   deleteColumn();
